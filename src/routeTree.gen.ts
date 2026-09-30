@@ -10,12 +10,20 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ArcRouteImport } from './routes/arc'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as ChallengesRouteImport } from './routes/challenges'
+import { Route as ProgressRouteImport } from './routes/progress'
+import { Route as SettingsRouteImport } from './routes/settings'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArcRoute = ArcRouteImport.update({
+  id: '/arc',
+  path: '/arc',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CalendarRoute = CalendarRouteImport.update({
@@ -28,35 +36,65 @@ const ChallengesRoute = ChallengesRouteImport.update({
   path: '/challenges',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProgressRoute = ProgressRouteImport.update({
+  id: '/progress',
+  path: '/progress',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/arc': typeof ArcRoute
   '/calendar': typeof CalendarRoute
   '/challenges': typeof ChallengesRoute
+  '/progress': typeof ProgressRoute
+  '/settings': typeof SettingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/arc': typeof ArcRoute
   '/calendar': typeof CalendarRoute
   '/challenges': typeof ChallengesRoute
+  '/progress': typeof ProgressRoute
+  '/settings': typeof SettingsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/arc': typeof ArcRoute
   '/calendar': typeof CalendarRoute
   '/challenges': typeof ChallengesRoute
+  '/progress': typeof ProgressRoute
+  '/settings': typeof SettingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/calendar' | '/challenges'
+  fullPaths:
+    '/' | '/arc' | '/calendar' | '/challenges' | '/progress' | '/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/calendar' | '/challenges'
-  id: '__root__' | '/' | '/calendar' | '/challenges'
+  to: '/' | '/arc' | '/calendar' | '/challenges' | '/progress' | '/settings'
+  id:
+    | '__root__'
+    | '/'
+    | '/arc'
+    | '/calendar'
+    | '/challenges'
+    | '/progress'
+    | '/settings'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ArcRoute: typeof ArcRoute
   CalendarRoute: typeof CalendarRoute
   ChallengesRoute: typeof ChallengesRoute
+  ProgressRoute: typeof ProgressRoute
+  SettingsRoute: typeof SettingsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -66,6 +104,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/arc': {
+      id: '/arc'
+      path: '/arc'
+      fullPath: '/arc'
+      preLoaderRoute: typeof ArcRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/calendar': {
@@ -82,13 +127,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ChallengesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/progress': {
+      id: '/progress'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof ProgressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ArcRoute: ArcRoute,
   CalendarRoute: CalendarRoute,
   ChallengesRoute: ChallengesRoute,
+  ProgressRoute: ProgressRoute,
+  SettingsRoute: SettingsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
