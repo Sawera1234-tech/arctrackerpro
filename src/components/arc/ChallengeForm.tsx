@@ -29,7 +29,7 @@ export function ChallengeForm({ open, onOpenChange, editing }: { open: boolean; 
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
-    const er: Record<string, string> = {};
+    const er: { [k: string]: string } & Partial<Record<"name"|"description"|"startDate"|"endDate"|"target"|"unit"|"days"|"interval", string>> = {};
     const name = f.name.trim();
     if (!name) er.name = "Give your challenge a name.";
     if (name.length > 60) er.name = "Keep it under 60 characters.";

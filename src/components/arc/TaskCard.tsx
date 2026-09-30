@@ -6,7 +6,7 @@ import type { Challenge, Entry } from "@/lib/arc/types";
 import { cn } from "@/lib/utils";
 import { Bar } from "./ui";
 
-export function TaskCard({ c, date, entry, stats }: { c: Challenge; date: string; entry?: Entry; stats?: ChallengeStats }) {
+export function TaskCard({ c, date, entry, stats }: { c: Challenge; date: string; entry?: Entry | undefined; stats?: ChallengeStats | undefined }) {
   const p = entryProgress(c, entry);
   const done = p >= 1;
   const [burst, setBurst] = useState(0);

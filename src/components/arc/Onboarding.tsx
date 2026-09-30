@@ -24,11 +24,11 @@ export function Onboarding() {
   const [name, setName] = useState("");
   const [areas, setAreas] = useState<string[]>(["Fitness"]);
   const [sample, setSample] = useState(true);
-  const pick = FIRST[areas[0] ?? "Fitness"];
+  const pick = FIRST[areas[0] ?? "Fitness"] ?? FIRST["Fitness"]!;
 
   function finish(withFirst: boolean) {
     const first = withFirst && !sample
-      ? { ...blankChallenge(), name: pick.name, icon: pick.icon, description: pick.desc, type: "measurable" as const, target: pick.target, unit: pick.unit, category: pick.cat as never, color: COLORS[0].value }
+      ? { ...blankChallenge(), name: pick.name, icon: pick.icon, description: pick.desc, type: "measurable" as const, target: pick.target, unit: pick.unit, category: pick.cat as never, color: COLORS[0]!.value }
       : undefined;
     actions.finishOnboarding(name, withFirst ? sample : false, first);
   }

@@ -16,14 +16,14 @@ export interface Challenge {
   category: Category;
   color: string;
   startDate: string; // yyyy-MM-dd
-  endDate?: string;
+  endDate?: string | undefined;
   frequency: Frequency;
   days: number[]; // 0=Sun for "specific"
   interval: number; // every N days for "custom"
   type: "simple" | "measurable";
   target: number;
   unit: string;
-  reminderTime?: string; // HH:mm
+  reminderTime?: string | undefined;
   notes: string;
   status: "active" | "paused" | "archived";
   createdAt: string;
@@ -31,7 +31,7 @@ export interface Challenge {
 
 export interface Entry {
   done: boolean;
-  value?: number;
+  value?: number | undefined;
 }
 
 /** entries[dateKey][challengeId] */

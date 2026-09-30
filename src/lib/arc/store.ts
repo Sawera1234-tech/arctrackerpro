@@ -150,7 +150,7 @@ export function defaultArc(ids: string[] = []): WinterArc {
 
 export function blankChallenge(): ChallengeInput {
   return {
-    name: "", description: "", icon: "🎯", category: "Personal", color: COLORS[0].value,
+    name: "", description: "", icon: "🎯", category: "Personal", color: COLORS[0]!.value,
     startDate: todayKey(), endDate: undefined, frequency: "daily", days: [1, 2, 3, 4, 5], interval: 2,
     type: "simple", target: 1, unit: "", reminderTime: undefined, notes: "",
   };
@@ -172,11 +172,11 @@ function sampleChallenges(): Challenge[] {
   const base = blankChallenge();
   const mk = (p: Partial<Challenge>): Challenge => ({ ...base, ...p, id: uid(), createdAt: new Date().toISOString(), status: "active" } as Challenge);
   return [
-    mk({ name: "Exercise", icon: "🏋️", category: "Fitness", description: "20-minute workout", type: "measurable", target: 20, unit: "min", color: COLORS[0].value }),
-    mk({ name: "Cold Shower", icon: "🚿", category: "Health", description: "Complete today's cold shower", color: COLORS[2].value }),
-    mk({ name: "Coding", icon: "💻", category: "Coding", description: "Code for 60 minutes", type: "measurable", target: 60, unit: "min", color: COLORS[1].value }),
-    mk({ name: "Reading", icon: "📚", category: "Reading", description: "Read 20 pages", type: "measurable", target: 20, unit: "pages", color: COLORS[5].value }),
-    mk({ name: "Water", icon: "💧", category: "Health", description: "Drink 2.5L water", type: "measurable", target: 2.5, unit: "L", color: COLORS[3].value }),
-    mk({ name: "Sleep", icon: "😴", category: "Sleep", description: "Sleep before 12:00 AM", color: COLORS[6].value }),
+    mk({ name: "Exercise", icon: "🏋️", category: "Fitness", description: "20-minute workout", type: "measurable", target: 20, unit: "min", color: COLORS[0]!.value }),
+    mk({ name: "Cold Shower", icon: "🚿", category: "Health", description: "Complete today's cold shower", color: COLORS[2]!.value }),
+    mk({ name: "Coding", icon: "💻", category: "Coding", description: "Code for 60 minutes", type: "measurable", target: 60, unit: "min", color: COLORS[1]!.value }),
+    mk({ name: "Reading", icon: "📚", category: "Reading", description: "Read 20 pages", type: "measurable", target: 20, unit: "pages", color: COLORS[5]!.value }),
+    mk({ name: "Water", icon: "💧", category: "Health", description: "Drink 2.5L water", type: "measurable", target: 2.5, unit: "L", color: COLORS[3]!.value }),
+    mk({ name: "Sleep", icon: "😴", category: "Sleep", description: "Sleep before 12:00 AM", color: COLORS[6]!.value }),
   ];
 }
